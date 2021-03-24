@@ -10,6 +10,8 @@
     "start": "nuxt start"
   },
   "dependencies": {
+    "@nuxtjs/tailwindcss": "^4.0.2",
+    "dotenv": "^8.2.0",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
