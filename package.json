@@ -2,7 +2,7 @@
   "name": "nuxtjs",
   "version": "1.0.0",
   "description": "My astonishing Nuxt.js project",
-  "author": "msweeneydev",
+  "author": "YuikoIto",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -24,6 +24,9 @@
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "@nuxtjs/tailwindcss": "^4.0.2",
+    "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

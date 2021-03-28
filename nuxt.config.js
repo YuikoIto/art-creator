@@ -17,10 +17,7 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: "#fff" },
+
   /*
    ** Global CSS
    */
@@ -49,10 +46,5 @@ export default {
   /*
    ** Build configuration
    */
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {},
-  },
+  build: {},
 };
