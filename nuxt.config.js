@@ -36,10 +36,16 @@ export default {
     API_BASE_URL,
     API_OGP_URL,
   },
+  buildModules: ["@nuxtjs/tailwindcss", "@aceforth/nuxt-optimized-images"],
+  optimizedImages: {
+    optimizeImages: true,
+    optimizeImagesInDev: true,
+  },
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv"],
+
   /*
    ** Build configuration
    */
