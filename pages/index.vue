@@ -1,6 +1,6 @@
 <template>
   <div
-    class="leading-normal tracking-normal text-white gradient"
+    class="leading-normal tracking-normal text-white background"
     style="font-family: 'Source Sans Pro', sans-serif"
   >
     <Header />
@@ -13,8 +13,7 @@
             ライブラリから画像を選択
           </h3>
           <p class="text-gray-600 mb-3 text-base">
-            できる限り輪郭がはっきりしている画像を選んでください。
-            <br />選択できる画像は2Mバイトまでです。
+            選択できる画像は2Mバイトまでです。
           </p>
           <label
             class="bg-gray-400 cursor-pointer inline-flex items-center hover:bg-gray-300 text-white font-bold py-2 px-4 rounded-full"
@@ -45,7 +44,7 @@
         </div>
         <div class="w-full mt-3 sm:w-1/2 relative">
           <img
-            v-if="!uploadImageUrl && !changedImageUrl"
+            v-if="!uploadImageUrl"
             src="../assets/img/defaultPic.png"
             alt="default"
             class="border-dashed border-4 border-gray-600"
@@ -54,37 +53,8 @@
             v-if="uploadImageUrl"
             class="border-dashed border-4 border-gray-600"
             width="100%"
-            :class="{ 'opacity-50': overlay }"
             :src="uploadImageUrl"
           />
-          <img
-            v-if="changedImageUrl"
-            class="border-dashed border-4 border-gray-600"
-            width="100%"
-            :src="changedImageUrl"
-          />
-          <div v-if="overlay" class="absolute overlay">
-            <svg
-              class="animate-spin"
-              xmlns="http://www.w3.org/2000/svg"
-              version="1.1"
-              height="40"
-              width="40"
-              viewBox="0 0 75 75"
-            >
-              <circle
-                cx="37.5"
-                cy="37.5"
-                r="33.5"
-                stroke-width="8"
-                fill="none"
-                stroke="#F5AD54"
-                stroke-linecap="square"
-                stroke-dasharray="151.55042961px,210.48670779px"
-                stroke-dashoffset="0"
-              />
-            </svg>
-          </div>
         </div>
       </div>
     </Section>
@@ -98,7 +68,10 @@
       <div
         v-for="art in arts"
         :key="art.id"
-        class="w-full md:w-1/3 p-3 flex flex-col cursor-pointer"
+        class="lg:w-1/6 md:w-1/3 w-1/2 p-1 flex flex-col cursor-pointer"
+        :class="{
+          'opacity-50 pointer-events-none': !uploadImageUrl || overlay,
+        }"
       >
         <div
           class="overflow-hidden rounded-lg shadow-lg transform transition hover:scale-105 duration-300 ease-in-out"
@@ -111,68 +84,74 @@
           />
         </div>
       </div>
-      <div class="mt-3" v-if="uploadImageUrl">
-        <label
-          class="cursor-pointer inline-flex items-center bg-white boder-solid border-2
-                 border-orange-600 hover:border-orange-500 text-white font-bold py-2 px-4 rounded-full"
-        >
-          <svg
-            class="w-8 h-8"
-            fill="#000000"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-          <div
-            class="text-gray-600 ml-2 text-base leading-normal"
-            @click="getArt"
-          >
-            絵画にする
-          </div>
-        </label>
-      </div>
     </Section>
     <Section title="画像をシェア/保存">
-      <p v-if="!changedImageUrl" class="w-full text-center mt-3 text-gray-600 text-2xl mb-3">
+      <p
+        v-if="!uploadImageUrl && !changedImageUrl && !overlay"
+        class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
+      >
         先に絵画を作成してください
       </p>
-      <ul v-if="changedImageUrl" class="flex space-x-6 mt-3">
-        <li>
-          <div @click="OpenTwitterModal" class="cursor-pointer">
-            <img
-              alt="twitter"
-              src="../assets/img/twitter.svg"
-              :width="size"
-              :height="size"
-            />
-          </div>
-        </li>
-        <li>
-          <div @click="OpenFBModal" class="cursor-pointer">
-            <img
-              alt="twitter"
-              src="../assets/img/facebook.svg"
-              :width="size"
-              :height="size"
-            />
-          </div>
-        </li>
-        <li>
-          <a :href="changedImageUrl" download>
-            <img
-              alt="line"
-              src="../assets/img/download.svg"
-              :width="size"
-              :height="size"
-            />
-          </a>
-        </li>
-      </ul>
+      <p
+        v-if="overlay"
+        class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
+      >
+        変換中...
+      </p>
+      <div class="w-full mx-auto">
+        <Loader v-if="overlay" />
+      </div>
+
+      <div v-if="changedImageUrl" class="w-full sm:w-1/2 p-6 mx-auto">
+        <h3
+          class="md:text-3xl text-lg text-gray-800 font-bold leading-none mb-3"
+        >
+          絵画が作成されました！
+        </h3>
+        <p class="text-gray-600 mb-3 text-base">
+          シェアや保存などしてお楽しみください。
+        </p>
+        <ul class="flex space-x-6 mx-auto">
+          <li>
+            <div @click="OpenTwitterModal" class="cursor-pointer">
+              <img
+                alt="twitter"
+                src="../assets/img/twitter.svg"
+                :width="size"
+                :height="size"
+              />
+            </div>
+          </li>
+          <li>
+            <div @click="OpenFBModal" class="cursor-pointer">
+              <img
+                alt="twitter"
+                src="../assets/img/facebook.svg"
+                :width="size"
+                :height="size"
+              />
+            </div>
+          </li>
+          <li>
+            <a :href="changedImageUrl" download>
+              <img
+                alt="line"
+                src="../assets/img/download.svg"
+                :width="size"
+                :height="size"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="w-full mt-3 sm:w-1/2 relative">
+        <img
+          v-if="changedImageUrl"
+          class="border-dashed border-4 border-gray-600"
+          :src="changedImageUrl"
+          width="100%"
+        />
+      </div>
     </Section>
     <Modal v-if="twitterModalFlag">
       <div>
@@ -181,10 +160,7 @@
           class="border-dashed border-4 mt-3 border-gray-600 mx-auto modalImageClass block w-full h-auto object-cover"
           :src="changedImageUrl"
         />
-        <div
-          @click="CloseModal"
-          class="absolute cursor-pointer top-0 right-0"
-        >
+        <div @click="CloseModal" class="absolute cursor-pointer top-0 right-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -213,10 +189,7 @@
           class="border-dashed border-4 mt-3 border-gray-600 mx-auto modalImageClass block w-full h-auto object-cover"
           :src="changedImageUrl"
         />
-        <div
-          @click="CloseModal"
-          class="absolute cursor-pointer top-0 right-0"
-        >
+        <div @click="CloseModal" class="absolute cursor-pointer top-0 right-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -256,12 +229,14 @@ import Rain from "~/assets/img/rain_princess.jpeg";
 import Scream from "~/assets/img/the_scream.jpeg";
 import Wreck from "~/assets/img/the_shipwreck_of_the_minotaur.jpeg";
 import Udnie from "~/assets/img/udnie.jpeg";
+import Loader from "~/components/Loader.vue";
 export default Vue.extend({
   components: {
     Modal,
     Header,
     Footer,
     Section,
+    Loader,
   },
   data() {
     return {
@@ -277,31 +252,31 @@ export default Vue.extend({
       tooBig: false,
       arts: [
         [Wave, 0],
+        [Scream, 1],
         [Muse, 2],
         [Rain, 3],
-        [Scream, 1],
-        [Wreck, 5],
         [Udnie, 4],
+        [Wreck, 5],
       ],
     };
   },
   computed: {
     size() {
-      return 36;
+      return 54;
     },
     url() {
-      return `https://nurie-maker.com/nurie/${this.uuid}`;
+      return `https://art-maker.com/art/${this.uuid}`;
     },
     twitterURL() {
       return (
         `https://twitter.com/intent/tweet?url=${this.url}&text=` +
         encodeURIComponent(
-          `絵画ツクールでオリジナル絵画を作ったよ\r\n #塗り絵ツクール`
+          `絵画ツクールで素敵な絵画を作ったよ\r\n #絵画ツクール`
         )
       );
     },
     facebookURL() {
-      return `https://www.facebook.com/sharer/sharer.php?u=${this.url}&t=塗り絵ツクールで塗り絵を作ったよ\n#塗り絵ツクール`;
+      return `https://www.facebook.com/sharer/sharer.php?u=${this.url}&t=絵画ツクールで素敵な絵画を作ったよ\n#絵画ツクール`;
     },
   },
   methods: {
@@ -320,7 +295,7 @@ export default Vue.extend({
       this.uuid = this.generateUuid();
       await postImageData(this.uuid, this.imageData).then(() => {
         this.isFetched = true;
-        window.history.pushState(null, null, `/nurie/${this.uuid}`);
+        window.history.pushState(null, null, `/art/${this.uuid}`);
       });
     },
     async OpenFBModal() {
@@ -328,7 +303,7 @@ export default Vue.extend({
       this.uuid = this.generateUuid();
       await postImageData(this.uuid, this.imageData).then(() => {
         this.isFetched = true;
-        window.history.pushState(null, null, `/nurie/${this.uuid}`);
+        window.history.pushState(null, null, `/art/${this.uuid}`);
       });
     },
     CloseModal() {
@@ -339,7 +314,7 @@ export default Vue.extend({
     },
     setImage(e) {
       this.file = e.target.files[0];
-      if(this.file) {
+      if (this.file) {
         if (this.file.size > 2 * 1000 * 1000) {
           this.tooBig = true;
           return;
@@ -353,7 +328,9 @@ export default Vue.extend({
       }
     },
     getArt(number) {
-      this.getResult(this.file, number);
+      if (this.file) {
+        this.getResult(this.file, number);
+      }
     },
     generateUuid() {
       let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
@@ -371,14 +348,19 @@ export default Vue.extend({
     },
     async getResult(file, style) {
       this.overlay = true;
-      try {
+      this.imageData = await getArtImage(file, style);
+      let errCount = 0;
+      while (!this.imageData && errCount < 3) {
+        errCount++;
         this.imageData = await getArtImage(file, style);
-        this.changedImageUrl = "data:image/png;base64," + this.imageData;
-        this.uploadImageUrl = "";
-        this.overlay = false;
-      } catch (error) {
-        console.error(error);
-        this.overlay = false;
+      }
+      this.changedImageUrl = "data:image/png;base64," + this.imageData;
+      this.uploadImageUrl = "";
+      this.overlay = false;
+      if (errCount === 3) {
+        alert(
+          "サーバーエラーが発生しました。しばらく経ってから再度お試しください。"
+        );
       }
     },
   },
@@ -388,16 +370,14 @@ export default Vue.extend({
 .gradient {
   background: linear-gradient(90deg, #38382e 0%, #c19a7d 100%);
 }
-.overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  -webkit-transform: translateY(-50%) translateX(-50%);
-  margin: auto;
+.background {
+  background-image: url("~/assets/img/background.png");
+  background-repeat: repeat;
+  background-size: 768px 432px;
 }
+
 .imageClass {
-  height: 350px;
+  height: 200px;
 }
 .modalImageClass {
   max-height: 350px;

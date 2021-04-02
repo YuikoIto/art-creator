@@ -1,34 +1,28 @@
 <template>
-  <div>
+  <div class="sm:pt-20 bg-black bg-opacity-25">
     <div
       class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center lg:pt-0 pt-5"
     >
-      <!--Left Col-->
       <div
         class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left"
       >
-        <p class="tracking-loose w-full md:block hidden">
+        <p class="tracking-loose w-full md:block hidden textShadow">
           オリジナル絵画を作りませんか？
         </p>
-        <h2 class="my-4 md:text-5xl text-2xl font-bold leading-tight">
+        <h2
+          class="my-4 md:text-5xl text-2xl font-bold leading-tight textShadow"
+        >
           絵画ツクール
         </h2>
-        <p class="leading-normal md:text-2xl text-base mb-8">
+        <p class="leading-normal md:text-2xl text-base mb-8 textShadow">
           画像をボタン一つで芸術作品にできます。
         </p>
         <a
-          class="md:mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full md:my-3 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+          class="md:mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full md:my-3 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out z-50"
           href="#make"
         >
           今すぐ作る
         </a>
-      </div>
-      <!--Right Col-->
-      <div class="w-full md:w-3/5 md:py-3 md:p-0 pb-3">
-        <img
-          class="w-full mx-auto w-4/5 z-50"
-          src="../assets/img/titlePic.png"
-        />
       </div>
     </div>
     <div class="relative -mt-12 lg:-mt-24">
@@ -72,3 +66,9 @@
     </div>
   </div>
 </template>
+
+<style>
+.textShadow {
+  text-shadow: #000 1px 0 5px;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
-  <section :id="id" class="bg-white md:py-8 py-4">
-    <div class="container max-w-5xl flex flex-wrap mx-auto m-8">
+  <section :id="id" class="bg-white md:py-4 py-2">
+    <div class="container max-w-5xl flex flex-wrap mx-auto m-4">
       <h1
         class="w-full my-2 md:text-5xl text-2xl font-bold leading-tight text-center text-gray-800"
       >

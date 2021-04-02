@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-black bg-opacity-25">
     <svg
       class="wave-top"
       viewBox="0 0 1439 147"
@@ -39,14 +39,20 @@
       class="md:flex md:justify-between container mx-auto py-3 md:py-6 px-5 md:px-20"
     >
       <div class="my-4 text-base leading-tight">
-        <a href="https://twitter.com/yui_active" class="underline"
+        <a href="https://twitter.com/yui_active" class="underline textShadow"
           ><strong>Yui</strong></a
         >
         All Rights Reserved.
       </div>
-      <div class="my-4 text-base leading-tight">
+      <div class="my-4 text-base leading-tight textShadow">
         {{ new Date().getFullYear() }} — <strong>© 絵画ツクール</strong>
       </div>
     </section>
   </div>
 </template>
+
+<style>
+.textShadow {
+  text-shadow: #000 1px 0 5px;
+}
+</style>
