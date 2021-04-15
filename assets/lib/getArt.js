@@ -30,7 +30,6 @@ export default async function getArtImage(file, styleNum) {
     );
     return response.data;
   } catch (error) {
-    console.error(error);
     return null;
   }
 }

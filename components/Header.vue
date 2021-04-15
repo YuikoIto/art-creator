@@ -18,7 +18,7 @@
           画像をボタン一つで芸術作品にできます。
         </p>
         <a
-          class="md:mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full md:my-3 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out z-50"
+          class="md:mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full md:my-3 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out z-50 sm:mb-0 mb-10"
           href="#make"
         >
           今すぐ作る

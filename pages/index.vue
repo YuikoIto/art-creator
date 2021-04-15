@@ -16,7 +16,7 @@
             選択できる画像は2Mバイトまでです。
           </p>
           <label
-            class="bg-gray-400 cursor-pointer inline-flex items-center hover:bg-gray-300 text-white font-bold py-2 px-4 rounded-full"
+            class="bg-yellow-600 cursor-pointer inline-flex items-center hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded-full"
           >
             <svg
               class="w-8 h-8"
@@ -47,11 +47,11 @@
             v-if="!uploadImageUrl"
             src="../assets/img/defaultPic.png"
             alt="default"
-            class="border-dashed border-4 border-gray-600"
+            class="border-double border-4 border-gray-600"
           />
           <img
             v-if="uploadImageUrl"
-            class="border-dashed border-4 border-gray-600"
+            class="border-double border-4 border-gray-600"
             width="100%"
             :src="uploadImageUrl"
           />
@@ -99,7 +99,7 @@
         変換中...
       </p>
       <div class="w-full mx-auto">
-        <Loader v-if="overlay" />
+        <Game v-if="!overlay" />
       </div>
 
       <div v-if="changedImageUrl" class="w-full sm:w-1/2 p-6 mx-auto">
@@ -147,7 +147,7 @@
       <div class="w-full mt-3 sm:w-1/2 relative">
         <img
           v-if="changedImageUrl"
-          class="border-dashed border-4 border-gray-600"
+          class="border-double border-4 border-gray-600"
           :src="changedImageUrl"
           width="100%"
         />
@@ -157,7 +157,7 @@
       <div>
         <img
           v-if="changedImageUrl"
-          class="border-dashed border-4 mt-3 border-gray-600 mx-auto modalImageClass block w-full h-auto object-cover"
+          class="border-double border-4 mt-3 border-gray-600 mx-auto modalImageClass block w-full h-auto object-cover"
           :src="changedImageUrl"
         />
         <div @click="CloseModal" class="absolute cursor-pointer top-0 right-0">
@@ -176,7 +176,7 @@
         </div>
         <button
           @click="tweetButton"
-          class="text-center mx-auto bg-gray-400 text-white font-bold rounded-b py-4 w-full shadow-lg"
+          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg"
         >
           ツイートする
         </button>
@@ -186,7 +186,7 @@
       <div>
         <img
           v-if="changedImageUrl"
-          class="border-dashed border-4 mt-3 border-gray-600 mx-auto modalImageClass block w-full h-auto object-cover"
+          class="border-double border-4 mt-3 border-gray-600 mx-auto modalImageClass block w-full h-auto object-cover"
           :src="changedImageUrl"
         />
         <div @click="CloseModal" class="absolute cursor-pointer top-0 right-0">
@@ -205,7 +205,7 @@
         </div>
         <button
           @click="tweetButton"
-          class="text-center mx-auto bg-gray-400 text-white font-bold rounded-b py-4 w-full shadow-lg"
+          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg"
         >
           シェアする
         </button>
@@ -229,14 +229,14 @@ import Rain from "~/assets/img/rain_princess.jpeg";
 import Scream from "~/assets/img/the_scream.jpeg";
 import Wreck from "~/assets/img/the_shipwreck_of_the_minotaur.jpeg";
 import Udnie from "~/assets/img/udnie.jpeg";
-import Loader from "~/components/Loader.vue";
+import Game from "~/components/Game.vue";
 export default Vue.extend({
   components: {
     Modal,
     Header,
     Footer,
     Section,
-    Loader,
+    Game,
   },
   data() {
     return {
@@ -350,14 +350,14 @@ export default Vue.extend({
       this.overlay = true;
       this.imageData = await getArtImage(file, style);
       let errCount = 0;
-      while (!this.imageData && errCount < 3) {
+      while (!this.imageData && errCount < 4) {
         errCount++;
         this.imageData = await getArtImage(file, style);
       }
       this.changedImageUrl = "data:image/png;base64," + this.imageData;
       this.uploadImageUrl = "";
       this.overlay = false;
-      if (errCount === 3) {
+      if (errCount === 4) {
         alert(
           "サーバーエラーが発生しました。しばらく経ってから再度お試しください。"
         );
@@ -368,7 +368,7 @@ export default Vue.extend({
 </script>
 <style>
 .gradient {
-  background: linear-gradient(90deg, #38382e 0%, #c19a7d 100%);
+  background: linear-gradient(90deg, #38382e 0%, #d97707 100%);
 }
 .background {
   background-image: url("~/assets/img/background.png");

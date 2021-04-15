@@ -72,7 +72,7 @@
         />
         <div class="flex items-center" @click="goTop">
           <div
-            class="cursor-pointer text-center mx-auto bg-orange-400 text-white font-bold rounded-b py-4 w-full shadow-lg"
+            class="cursor-pointer text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg"
           >
             絵画ツクールで絵画を作る
           </div>
@@ -133,7 +133,7 @@ export default {
 </script>
 <style>
 .gradient {
-  background: linear-gradient(90deg, #38382e 0%, #c19a7d 100%);
+  background: linear-gradient(90deg, #38382e 0%, #d97707 100%);
 }
 .background {
   background-image: url("~/assets/img/background.png");
