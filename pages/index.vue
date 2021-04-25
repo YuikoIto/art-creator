@@ -93,13 +93,13 @@
         先に絵画を作成してください
       </p>
       <p
-        v-if="overlay"
+        v-if="true"
         class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
       >
-        変換中...
+        変換中
       </p>
       <div class="w-full mx-auto">
-        <Game v-if="!overlay" />
+        <Game v-if="true" />
       </div>
 
       <div v-if="changedImageUrl" class="w-full sm:w-1/2 p-6 mx-auto">
@@ -223,13 +223,14 @@ import Modal from "~/components/Modal.vue";
 import Header from "~/components/Header.vue";
 import Footer from "~/components/Footer.vue";
 import Section from "~/components/Section.vue";
+import Game from "~/components/Game.vue";
+import Loader from "~/components/Loader.vue";
 import Wave from "~/assets/img/wave.jpeg";
 import Muse from "~/assets/img/la_muse.jpeg";
 import Rain from "~/assets/img/rain_princess.jpeg";
 import Scream from "~/assets/img/the_scream.jpeg";
 import Wreck from "~/assets/img/the_shipwreck_of_the_minotaur.jpeg";
 import Udnie from "~/assets/img/udnie.jpeg";
-import Game from "~/components/Game.vue";
 export default Vue.extend({
   components: {
     Modal,
@@ -237,6 +238,7 @@ export default Vue.extend({
     Footer,
     Section,
     Game,
+    Loader,
   },
   data() {
     return {
@@ -350,14 +352,14 @@ export default Vue.extend({
       this.overlay = true;
       this.imageData = await getArtImage(file, style);
       let errCount = 0;
-      while (!this.imageData && errCount < 4) {
+      while (!this.imageData && errCount < 10) {
         errCount++;
         this.imageData = await getArtImage(file, style);
       }
       this.changedImageUrl = "data:image/png;base64," + this.imageData;
       this.uploadImageUrl = "";
       this.overlay = false;
-      if (errCount === 4) {
+      if (errCount === 10) {
         alert(
           "サーバーエラーが発生しました。しばらく経ってから再度お試しください。"
         );
