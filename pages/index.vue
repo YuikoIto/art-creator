@@ -92,14 +92,8 @@
       >
         先に絵画を作成してください
       </p>
-      <p
-        v-if="true"
-        class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
-      >
-        変換中
-      </p>
       <div class="w-full mx-auto">
-        <Game v-if="true" />
+        <Loaging v-if="overlay" />
       </div>
 
       <div v-if="changedImageUrl" class="w-full sm:w-1/2 p-6 mx-auto">
@@ -223,7 +217,7 @@ import Modal from "~/components/Modal.vue";
 import Header from "~/components/Header.vue";
 import Footer from "~/components/Footer.vue";
 import Section from "~/components/Section.vue";
-import Game from "~/components/Game.vue";
+import Loaging from "~/components/Loaging.vue";
 import Loader from "~/components/Loader.vue";
 import Wave from "~/assets/img/wave.jpeg";
 import Muse from "~/assets/img/la_muse.jpeg";
@@ -237,7 +231,7 @@ export default Vue.extend({
     Header,
     Footer,
     Section,
-    Game,
+    Loaging,
     Loader,
   },
   data() {
@@ -350,20 +344,18 @@ export default Vue.extend({
     },
     async getResult(file, style) {
       this.overlay = true;
-      this.imageData = await getArtImage(file, style);
-      let errCount = 0;
-      while (!this.imageData && errCount < 10) {
-        errCount++;
-        this.imageData = await getArtImage(file, style);
-      }
-      this.changedImageUrl = "data:image/png;base64," + this.imageData;
-      this.uploadImageUrl = "";
-      this.overlay = false;
-      if (errCount === 10) {
+      const res = await getArtImage(file, style);
+      if (res.status === "NG") {
         alert(
           "サーバーエラーが発生しました。しばらく経ってから再度お試しください。"
         );
+        console.error(res.status_message);
+        return;
       }
+      this.imageData = res.result_img;
+      this.changedImageUrl = "data:image/png;base64," + this.imageData;
+      this.uploadImageUrl = "";
+      this.overlay = false;
     },
   },
 });
