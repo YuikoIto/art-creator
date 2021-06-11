@@ -38,7 +38,7 @@
               @change="setImage"
             />
           </label>
-          <p v-if="tooBig" class="text-gray-800 mt-5">
+          <p v-if="tooBig" class="text-red-500 mt-5">
             画像サイズが大き過ぎます。<br />2Mバイトまでの画像を選んでください。
           </p>
         </div>
@@ -308,12 +308,12 @@ export default {
       window.history.pushState(null, null, "/");
     },
     setImage(e) {
+      if (e.target.files[0] > 2 * 1000 * 1000) {
+        this.tooBig = true;
+        return;
+      }
       this.file = e.target.files[0];
       if (this.file) {
-        if (this.file.size > 2 * 1000 * 1000) {
-          this.tooBig = true;
-          return;
-        }
         this.changedImageUrl = "";
         const reader = new FileReader();
         reader.addEventListener("load", () => {
