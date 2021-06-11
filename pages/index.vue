@@ -170,7 +170,7 @@
         </div>
         <button
           @click="tweetButton"
-          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg"
+          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-yellow-400"
         >
           ツイートする
         </button>
@@ -199,7 +199,7 @@
         </div>
         <button
           @click="tweetButton"
-          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg"
+          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-yellow-400"
         >
           シェアする
         </button>
@@ -210,7 +210,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import getArtImage from "~/assets/lib/getArt";
 import postImageData from "~/assets/lib/postImageData";
 import Modal from "~/components/Modal.vue";
@@ -225,7 +224,7 @@ import Rain from "~/assets/img/rain_princess.jpeg";
 import Scream from "~/assets/img/the_scream.jpeg";
 import Wreck from "~/assets/img/the_shipwreck_of_the_minotaur.jpeg";
 import Udnie from "~/assets/img/udnie.jpeg";
-export default Vue.extend({
+export default {
   components: {
     Modal,
     Header,
@@ -261,7 +260,7 @@ export default Vue.extend({
       return 54;
     },
     url() {
-      return `https://art-maker.net/art/${this.uuid}`;
+      return `https://art-creator.net/art/${this.uuid}`;
     },
     twitterURL() {
       return (
@@ -358,7 +357,7 @@ export default Vue.extend({
       this.overlay = false;
     },
   },
-});
+};
 </script>
 <style>
 .gradient {

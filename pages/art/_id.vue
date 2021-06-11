@@ -87,10 +87,13 @@ import Footer from "~/components/Footer.vue";
 export default {
   async asyncData({ params }) {
     return {
-      url: `https://art-maker.net/nurie/${params.id}`,
+      url: `https://art-creator.net/nurie/${params.id}`,
       image: `https://nurie.s3-ap-northeast-1.amazonaws.com/ogpimg/${params.id}.jpg`,
       twitterImage: `https://nurie.s3-ap-northeast-1.amazonaws.com/ogpimg/${params.id}.jpg`,
     };
+  },
+  components: {
+    Footer,
   },
   head() {
     return {
@@ -120,9 +123,6 @@ export default {
         },
       ],
     };
-  },
-  components: {
-    Footer,
   },
   methods: {
     goTop() {

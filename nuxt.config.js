@@ -5,7 +5,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: "アートツクール",
+    title: "絵画ツクール",
     htmlAttrs: {
       lang: "ja",
       prefix: "og: http://ogp.me/ns#",
@@ -38,12 +38,12 @@ export default {
       {
         hid: "og:image",
         property: "og:image",
-        content: "http://ogp-builder.com/MkU6cw/https://art-creator.net",
+        content: "https://yuilog.xyz/wp-content/uploads/2021/06/background.png",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:image",
-        content: "http://ogp-builder.com/MkU6cw/https://art-creator.net",
+        content: "https://yuilog.xyz/wp-content/uploads/2021/06/background.png",
       },
       { name: "twitter:site", content: "@yui_active" },
     ],
@@ -51,7 +51,7 @@ export default {
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "https://art-creator.net/favicon.png",
+        href: "https://yuilog.xyz/wp-content/uploads/2021/06/favicon.png",
       },
     ],
   },

@@ -1,7 +1,7 @@
 <template>
   <transition name="modal" appear>
     <div class="modal__overlay">
-      <div class="modal__window max-h-96 mx-3 w-full lg:w-1/3 md:1/2">
+      <div class="modal__window mx-3 w-full lg:w-1/3 md:1/2">
         <div class="modal__content">
           <slot />
         </div>
