@@ -5,18 +5,58 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || "",
+    title: "アートツクール",
+    htmlAttrs: {
+      lang: "ja",
+      prefix: "og: http://ogp.me/ns#",
+    },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
         hid: "description",
         name: "description",
-        content: process.env.npm_package_description || "",
+        content: "絵画をかんたんに作れるサービスです",
+      },
+      {
+        hid: "og:site_name",
+        property: "og:site_name",
+        content: "絵画",
+      },
+      { hid: "og:type", property: "og:type", content: "article" },
+      {
+        hid: "og:url",
+        property: "og:url",
+        content: "https://art-creator.net",
+      },
+      { hid: "og:title", property: "og:title", content: "絵画ツクール" },
+      {
+        hid: "og:description",
+        property: "og:description",
+        content: "絵画をかんたんに作れるサービスです",
+      },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: "http://ogp-builder.com/MkU6cw/https://art-creator.net",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:image",
+        content: "http://ogp-builder.com/MkU6cw/https://art-creator.net",
+      },
+      { name: "twitter:site", content: "@yui_active" },
+    ],
+    link: [
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "https://art-creator.net/favicon.png",
       },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
+
+  target: "static",
 
   /*
    ** Global CSS

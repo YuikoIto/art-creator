@@ -261,7 +261,7 @@ export default Vue.extend({
       return 54;
     },
     url() {
-      return `https://art-maker.com/art/${this.uuid}`;
+      return `https://art-maker.net/art/${this.uuid}`;
     },
     twitterURL() {
       return (
