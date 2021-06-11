@@ -9,12 +9,14 @@
 <style>
 .loading-message::before {
   content: "変換中...";
+  -moz-animation: message 5s infinite linear;
+  -webkit-animation: message 5s infinite linear;
   animation: message 5s infinite linear;
 }
 
 @keyframes message {
   50% {
-    content: "変換には10秒ほどかかります";
+    content: "10秒ほどかかる可能性があります";
   }
   100% {
     content: "焦らずにお待ち下さい";
@@ -37,6 +39,8 @@
     center/7px 8px no-repeat;
   display: grid;
   overflow: hidden;
+  -moz-animation: t5-0 3s infinite linear;
+  -webkit-animation: t5-0 3s infinite linear;
   animation: t5-0 3s infinite linear;
 }
 .time-loader::before,
@@ -57,8 +61,9 @@
       100% 205%,
     linear-gradient(var(--c2) 0 0) center/0 100%;
   background-repeat: no-repeat;
-  animation: inherit;
-  animation-name: t5-1;
+  -moz-animationt: 5-1 inherit;
+  animation: t5-1 inherit;
+  -webkit-animation: t5-1 inherit;
 }
 
 .time-loader::after {
