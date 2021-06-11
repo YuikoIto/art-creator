@@ -87,7 +87,7 @@ import Footer from "~/components/Footer.vue";
 export default {
   async asyncData({ params }) {
     return {
-      url: `https://art-creator.net/nurie/${params.id}`,
+      url: `https://art-creator.net/art/${params.id}`,
       image: `https://nurie.s3-ap-northeast-1.amazonaws.com/ogpimg/${params.id}.jpg`,
       twitterImage: `https://nurie.s3-ap-northeast-1.amazonaws.com/ogpimg/${params.id}.jpg`,
     };
