@@ -321,6 +321,9 @@ export default {
         });
         reader.readAsDataURL(this.file);
       }
+      if (this.$refs.fileInput.value) {
+        this.$refs.fileInput.value = "";
+      }
     },
     getArt(number) {
       if (this.file) {
