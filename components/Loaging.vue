@@ -1,152 +1,76 @@
 <template>
   <div class="w-full mx-auto">
-    <div
-      class="loading-message w-full text-center mt-3 text-gray-600 text-2xl mb-3"
-    ></div>
+    <div class="w-full text-center mt-3 text-gray-600 md:text-2xl text-lg mb-3">
+      {{ message }}
+    </div>
     <div class="time-loader w-full mx-auto"></div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      message: "変換中...",
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.message = "ただいま愛情込めて描いています";
+    }, 2000);
+    setTimeout(() => {
+      this.message = "おまたせしてすみません";
+    }, 4000);
+    setTimeout(() => {
+      this.message = "焦らずにお待ち下さい";
+    }, 6000);
+    setTimeout(() => {
+      this.message = "遅すぎますか？";
+    }, 8000);
+    setTimeout(() => {
+      this.message = "決してサボってるわけではないんです";
+    }, 10000);
+    setTimeout(() => {
+      this.message = "只今大慌てで描いています";
+    }, 12000);
+    setTimeout(() => {
+      this.message = "もう少し..もう少しだけお待ち下さい";
+    }, 14000);
+    setTimeout(() => {
+      this.message = "この画像重くないですか？";
+    }, 16000);
+    setTimeout(() => {
+      this.message = "でも頑張って描いていますよ";
+    }, 18000);
+    setTimeout(() => {
+      this.message = "あとちょっとだと思うんです";
+    }, 20000);
+    setTimeout(() => {
+      this.message = "あああ手元が狂いました";
+    }, 22000);
+    setTimeout(() => {
+      this.message = "すぐに修正するのでお待ち下さい";
+    }, 24000);
+    setTimeout(() => {
+      this.message = "遅いって？";
+    }, 26000);
+    setTimeout(() => {
+      this.message = "お金がなくてサーバー代をケチった結果です";
+    }, 28000);
+  },
+};
+</script>
 <style>
-.loading-message::before {
-  content: "変換中...";
-  -moz-animation: message 5s infinite linear;
-  -webkit-animation: message 5s infinite linear;
-  animation: message 5s infinite linear;
-}
-
-@keyframes message {
-  50% {
-    content: "10秒ほどかかる可能性があります";
-  }
-  100% {
-    content: "焦らずにお待ち下さい";
-  }
-}
-@-moz-keyframes message {
-  50% {
-    content: "10秒ほどかかる可能性があります";
-  }
-  100% {
-    content: "焦らずにお待ち下さい";
-  }
-}
-@-webkit-keyframes message {
-  50% {
-    content: "10秒ほどかかる可能性があります";
-  }
-  100% {
-    content: "焦らずにお待ち下さい";
-  }
-}
-
 .time-loader {
-  --c1: #38382e;
-  --c2: #d97707;
-  width: 40px;
-  height: 80px;
-  border-top: 4px solid var(--c1);
-  border-bottom: 4px solid var(--c1);
-  background: linear-gradient(
-      90deg,
-      var(--c1) 2px,
-      var(--c2) 0 5px,
-      var(--c1) 0
-    )
-    center/7px 8px no-repeat;
-  display: grid;
-  overflow: hidden;
-  -moz-animation: t5-0 3s infinite linear;
-  -webkit-animation: t5-0 3s infinite linear;
-  animation: t5-0 3s infinite linear;
+  width: 120px;
+  height: 20px;
+  -webkit-mask: linear-gradient(90deg, #d97707 70%, #0000 0) left/20% 100%;
+  background: linear-gradient(#d97707 0 0) left -25% top 0 /20% 100% no-repeat
+    #ddd;
+  animation: ct7 1s infinite steps(6);
 }
-.time-loader::before,
-.time-loader::after {
-  content: "";
-  grid-area: 1/1;
-  width: 75%;
-  height: calc(50% - 4px);
-  margin: 0 auto;
-  border: 2px solid var(--c1);
-  border-top: 0;
-  border-radius: 0 0 40% 40%;
-  -webkit-mask: linear-gradient(#000 0 0) bottom/4px 2px no-repeat,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
-  background: linear-gradient(var(--d, 0deg), var(--c2) 50%, #0000 0) bottom /
-      100% 205%,
-    linear-gradient(var(--c2) 0 0) center/0 100%;
-  background-repeat: no-repeat;
-  -moz-animation: inherit;
-  -webkit-animation: inherit;
-  animation: inherit;
-  -moz-animation-name: t5-1;
-  -webkit-animation-name: t5-1;
-  animation-name: t5-1;
-}
-
-.time-loader::after {
-  transform-origin: 50% calc(100% + 2px);
-  transform: scaleY(-1);
-  --s: 3px;
-  --d: 180deg;
-}
-
-@-moz-keyframes t5-0 {
-  80% {
-    transform: rotate(0);
-  }
+@keyframes ct7 {
   100% {
-    transform: rotate(0.5turn);
-  }
-}
-
-@-webkit-keyframes t5-0 {
-  80% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(0.5turn);
-  }
-}
-
-@keyframes t5-0 {
-  80% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(0.5turn);
-  }
-}
-
-@-moz-keyframes t5-1 {
-  10%,
-  70% {
-    background-size: 100% 205%, var(--s, 0) 100%;
-  }
-  70%,
-  100% {
-    background-position: top, center;
-  }
-}
-@-webkit-keyframes t5-1 {
-  10%,
-  70% {
-    background-size: 100% 205%, var(--s, 0) 100%;
-  }
-  70%,
-  100% {
-    background-position: top, center;
-  }
-}
-@keyframes t5-1 {
-  10%,
-  70% {
-    background-size: 100% 205%, var(--s, 0) 100%;
-  }
-  70%,
-  100% {
-    background-position: top, center;
+    background-position: right -25% top 0;
   }
 }
 </style>

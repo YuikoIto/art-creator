@@ -308,11 +308,13 @@ export default {
       window.history.pushState(null, null, "/");
     },
     setImage(e) {
-      if (e.target.files[0] > 2 * 1000 * 1000) {
+      const targetFile = e.target.files[0];
+      if (targetFile.size > 2 * 1000 * 1000) {
         this.tooBig = true;
         return;
       }
-      this.file = e.target.files[0];
+      this.tooBig = false;
+      this.file = targetFile;
       if (this.file) {
         this.changedImageUrl = "";
         const reader = new FileReader();
