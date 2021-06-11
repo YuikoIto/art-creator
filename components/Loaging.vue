@@ -22,6 +22,22 @@
     content: "焦らずにお待ち下さい";
   }
 }
+@-moz-keyframes message {
+  50% {
+    content: "10秒ほどかかる可能性があります";
+  }
+  100% {
+    content: "焦らずにお待ち下さい";
+  }
+}
+@-webkit-keyframes message {
+  50% {
+    content: "10秒ほどかかる可能性があります";
+  }
+  100% {
+    content: "焦らずにお待ち下さい";
+  }
+}
 
 .time-loader {
   --c1: #38382e;
@@ -61,9 +77,12 @@
       100% 205%,
     linear-gradient(var(--c2) 0 0) center/0 100%;
   background-repeat: no-repeat;
-  -moz-animationt: 5-1 inherit;
-  animation: t5-1 inherit;
-  -webkit-animation: t5-1 inherit;
+  -moz-animation: inherit;
+  -webkit-animation: inherit;
+  animation: inherit;
+  -moz-animation-name: t5-1;
+  -webkit-animation-name: t5-1;
+  animation-name: t5-1;
 }
 
 .time-loader::after {
@@ -71,6 +90,24 @@
   transform: scaleY(-1);
   --s: 3px;
   --d: 180deg;
+}
+
+@-moz-keyframes t5-0 {
+  80% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(0.5turn);
+  }
+}
+
+@-webkit-keyframes t5-0 {
+  80% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(0.5turn);
+  }
 }
 
 @keyframes t5-0 {
@@ -82,6 +119,26 @@
   }
 }
 
+@-moz-keyframes t5-1 {
+  10%,
+  70% {
+    background-size: 100% 205%, var(--s, 0) 100%;
+  }
+  70%,
+  100% {
+    background-position: top, center;
+  }
+}
+@-webkit-keyframes t5-1 {
+  10%,
+  70% {
+    background-size: 100% 205%, var(--s, 0) 100%;
+  }
+  70%,
+  100% {
+    background-position: top, center;
+  }
+}
 @keyframes t5-1 {
   10%,
   70% {
