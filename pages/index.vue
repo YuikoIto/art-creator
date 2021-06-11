@@ -33,13 +33,13 @@
               id="file"
               ref="fileInput"
               type="file"
-              accept="image/*"
+              accept=".jpeg, .png"
               class="hidden"
               @change="setImage"
             />
           </label>
-          <p v-if="tooBig">
-            画像サイズが大きすぎます<br />2Mバイトまでの画像を選んでください。
+          <p v-if="tooBig" class="text-gray-800 mt-5">
+            画像サイズが大き過ぎます。<br />2Mバイトまでの画像を選んでください。
           </p>
         </div>
         <div class="w-full mt-3 sm:w-1/2 relative">
