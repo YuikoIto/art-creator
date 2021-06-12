@@ -370,7 +370,6 @@ export default {
       }
       this.imageData = res.result_img;
       this.changedImageUrl = "data:image/png;base64," + this.imageData;
-      this.uploadImageUrl = "";
       this.overlay = false;
     },
   },
