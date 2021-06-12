@@ -13,7 +13,7 @@
             ライブラリから画像を選択
           </h3>
           <p class="text-gray-600 mb-3 text-base">
-            選択できる画像は2Mバイトまでです。
+            選択できる画像は40Mバイトまでです。
           </p>
           <label
             class="bg-yellow-600 cursor-pointer inline-flex items-center hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded-full"
@@ -39,7 +39,7 @@
             />
           </label>
           <p v-if="tooBig" class="text-red-500 mt-5">
-            画像サイズが大き過ぎます。<br />2Mバイトまでの画像を選んでください。
+            画像サイズが大き過ぎます。<br />40Mバイトまでの画像を選んでください。
           </p>
         </div>
         <div class="w-full mt-3 sm:w-1/2 relative">
@@ -212,6 +212,7 @@
 <script>
 import getArtImage from "~/assets/lib/getArt";
 import postImageData from "~/assets/lib/postImageData";
+import resizeImage from "~/assets/lib/resizeImage";
 import Modal from "~/components/Modal.vue";
 import Header from "~/components/Header.vue";
 import Footer from "~/components/Footer.vue";
@@ -238,7 +239,7 @@ export default {
       changedImageUrl: "",
       uploadImageUrl: "",
       overlay: false,
-      file: "",
+      base64: "",
       uuid: "",
       twitterModalFlag: false,
       FBModalFlag: false,
@@ -307,29 +308,38 @@ export default {
       this.isFetched = false;
       window.history.pushState(null, null, "/");
     },
-    setImage(e) {
-      const targetFile = e.target.files[0];
-      if (targetFile.size > 2 * 1000 * 1000) {
-        this.tooBig = true;
-        return;
-      }
-      this.tooBig = false;
-      this.file = targetFile;
-      if (this.file) {
-        this.changedImageUrl = "";
+    checkImageSize(file) {
+      return new Promise((resolve) => {
         const reader = new FileReader();
-        reader.addEventListener("load", () => {
+        if (file.size > 40 * 1000 * 1000) {
+          this.tooBig = true;
+          return;
+        }
+        this.tooBig = false;
+        reader.onload = (e) => {
           this.uploadImageUrl = reader.result;
-        });
-        reader.readAsDataURL(this.file);
+          const image = new Image();
+          image.src = e.target.result;
+          image.onload = () => {
+            resolve(image);
+          };
+        };
+        reader.readAsDataURL(file);
+      });
+    },
+    async setImage(e) {
+      const [file] = e.target.files;
+      const image = await this.checkImageSize(file);
+      if (image) {
+        this.base64 = await resizeImage(image, 800, 800);
       }
       if (this.$refs.fileInput.value) {
         this.$refs.fileInput.value = "";
       }
     },
     getArt(number) {
-      if (this.file) {
-        this.getResult(this.file, number);
+      if (this.base64) {
+        this.getResult(this.base64, number);
       }
     },
     generateUuid() {
@@ -352,7 +362,9 @@ export default {
       if (res.status === "NG") {
         alert(
           "サーバーエラーが発生しました。しばらく経ってから再度お試しください。"
-        );
+        )
+          ? ""
+          : window.location.reload();
         console.error(res.status_message);
         return;
       }
