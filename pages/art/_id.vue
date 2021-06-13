@@ -8,7 +8,7 @@
       <div>
         <div class="container mx-auto text-center pt-4 pb-12">
           <h2 class="my-4 md:text-5xl text-2xl font-bold leading-tight">
-            絵画ツクール
+            {{ $t("絵画ツクール") }}
           </h2>
         </div>
         <div class="relative -mt-12 lg:-mt-24">
@@ -56,7 +56,7 @@
       <h1
         class="w-full md:text-5xl text-2xl font-bold leading-tight text-center text-gray-800"
       >
-        作成された絵画
+        {{ $t("作成された絵画") }}
       </h1>
       <div class="w-full mb-4">
         <div
@@ -74,7 +74,7 @@
           <div
             class="cursor-pointer text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg"
           >
-            絵画ツクールで絵画を作る
+            {{ $t("絵画ツクールで絵画を作る") }}
           </div>
         </div>
       </div>
@@ -85,11 +85,13 @@
 <script>
 import Footer from "~/components/Footer.vue";
 export default {
-  async asyncData({ params }) {
+  async asyncData({ params, app }) {
+    const locale = app.$cookies.get("locale");
     return {
       url: `https://art-creator.net/art/${params.id}`,
       image: `https://nurie.s3-ap-northeast-1.amazonaws.com/ogpimg/${params.id}.jpg`,
       twitterImage: `https://nurie.s3-ap-northeast-1.amazonaws.com/ogpimg/${params.id}.jpg`,
+      defaultLang: locale,
     };
   },
   components: {
@@ -97,23 +99,23 @@ export default {
   },
   head() {
     return {
-      title: "オリジナル絵画を作ろう",
+      title: this.$t("オリジナル絵画を作ろう"),
       meta: [
         {
           hid: "description",
           name: "description",
-          content: "オリジナル絵画を作ろう",
+          content: this.$t("オリジナル絵画を作ろう"),
         },
         { hid: "og:type", property: "og:type", content: "article" },
         {
           hid: "og:title",
           property: "og:title",
-          content: "絵画ツクール",
+          content: this.$t("絵画ツクール"),
         },
         {
           hid: "og:description",
           property: "og:description",
-          content: "オリジナル絵画を作ろう",
+          content: this.$t("オリジナル絵画を作ろう"),
         },
         { hid: "og:url", property: "og:url", content: this.url },
         { hid: "og:image", property: "og:image", content: this.image },
@@ -123,6 +125,15 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    if (this.defaultLang) {
+      return;
+    }
+    const userLanguage = navigator.language;
+    const setLang = userLanguage === "ja" ? "ja" : "en";
+    this.$cookies.set("locale", setLang);
+    this.$i18n.locale = setLang;
   },
   methods: {
     goTop() {

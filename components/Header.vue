@@ -7,21 +7,21 @@
         class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left"
       >
         <p class="tracking-loose w-full md:block hidden textShadow">
-          オリジナル絵画を作りませんか？
+          {{ $t("オリジナル絵画を作りませんか？") }}
         </p>
         <h2
           class="my-4 md:text-5xl text-2xl font-bold leading-tight textShadow"
         >
-          絵画ツクール
+          {{ $t("絵画ツクール") }}
         </h2>
         <p class="leading-normal md:text-2xl text-base mb-8 textShadow">
-          画像をボタン一つで芸術作品にできます。
+          {{ $t("画像をボタン一つで芸術作品にできます。") }}
         </p>
         <a
           class="md:mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full md:my-3 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out z-50 sm:mb-0 mb-10"
           href="#make"
         >
-          今すぐ作る
+          {{ $t("今すぐ作る") }}
         </a>
       </div>
     </div>

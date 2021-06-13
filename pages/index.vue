@@ -10,10 +10,10 @@
           <h3
             class="md:text-3xl text-lg text-gray-800 font-bold leading-none mb-3"
           >
-            ライブラリから画像を選択
+            {{ $t("ライブラリから画像を選択") }}
           </h3>
           <p class="text-gray-600 mb-3 text-base">
-            選択できる画像は40Mバイトまでです。
+            {{ $t("選択できる画像は40Mバイトまでです。") }}
           </p>
           <label
             class="bg-yellow-600 cursor-pointer inline-flex items-center hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded-full"
@@ -28,7 +28,9 @@
                 d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
               />
             </svg>
-            <span class="ml-2 text-base leading-normal">画像を選択</span>
+            <span class="ml-2 text-base leading-normal">{{
+              $t("画像を選択")
+            }}</span>
             <input
               id="file"
               ref="fileInput"
@@ -39,7 +41,9 @@
             />
           </label>
           <p v-if="tooBig" class="text-red-500 mt-5">
-            画像サイズが大き過ぎます。<br />40Mバイトまでの画像を選んでください。
+            {{ $t("画像サイズが大き過ぎます。") }}<br />{{
+              $t("40Mバイトまでの画像を選んでください。")
+            }}
           </p>
         </div>
         <div class="w-full mt-3 sm:w-1/2 relative">
@@ -63,7 +67,7 @@
         class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
         v-if="!uploadImageUrl && !changedImageUrl"
       >
-        先に画像を選択してください
+        {{ $t("先に画像を選択してください") }}
       </p>
       <div
         v-for="art in arts"
@@ -90,7 +94,7 @@
         v-if="!uploadImageUrl && !changedImageUrl && !overlay"
         class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
       >
-        先に絵画を作成してください
+        {{ $t("先に絵画を作成してください") }}
       </p>
       <div class="w-full mx-auto">
         <Loaging v-if="overlay" />
@@ -100,10 +104,10 @@
         <h3
           class="md:text-3xl text-lg text-gray-800 font-bold leading-none mb-3"
         >
-          絵画が作成されました！
+          {{ $t("絵画が作成されました！") }}
         </h3>
         <p class="text-gray-600 mb-3 text-base">
-          シェアや保存などしてお楽しみください。
+          {{ $t("シェアや保存などしてお楽しみください。") }}
         </p>
         <ul class="flex space-x-6 mx-auto">
           <li>
@@ -172,7 +176,7 @@
           @click="tweetButton"
           class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-yellow-400"
         >
-          ツイートする
+          {{ $t("ツイートする") }}
         </button>
       </div>
     </Modal>
@@ -201,7 +205,7 @@
           @click="tweetButton"
           class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-yellow-400"
         >
-          シェアする
+          {{ $t("シェアする") }}
         </button>
       </div>
     </Modal>
@@ -218,7 +222,6 @@ import Header from "~/components/Header.vue";
 import Footer from "~/components/Footer.vue";
 import Section from "~/components/Section.vue";
 import Loaging from "~/components/Loaging.vue";
-import Loader from "~/components/Loader.vue";
 import Wave from "~/assets/img/wave.jpeg";
 import Muse from "~/assets/img/la_muse.jpeg";
 import Rain from "~/assets/img/rain_princess.jpeg";
@@ -226,13 +229,18 @@ import Scream from "~/assets/img/the_scream.jpeg";
 import Wreck from "~/assets/img/the_shipwreck_of_the_minotaur.jpeg";
 import Udnie from "~/assets/img/udnie.jpeg";
 export default {
+  asyncData({ app }) {
+    const locale = app.$cookies.get("locale");
+    return {
+      defaultLang: locale,
+    };
+  },
   components: {
     Modal,
     Header,
     Footer,
     Section,
     Loaging,
-    Loader,
   },
   data() {
     return {
@@ -264,16 +272,27 @@ export default {
       return `https://art-creator.net/art/${this.uuid}`;
     },
     twitterURL() {
+      const shareText = this.$t("絵画ツクールで素敵な絵画を作ったよ");
+      const hash = this.$t("#絵画ツクール");
       return (
         `https://twitter.com/intent/tweet?url=${this.url}&text=` +
-        encodeURIComponent(
-          `絵画ツクールで素敵な絵画を作ったよ\r\n #絵画ツクール`
-        )
+        encodeURIComponent(shareText + `\r\n` + hash)
       );
     },
     facebookURL() {
-      return `https://www.facebook.com/sharer/sharer.php?u=${this.url}&t=絵画ツクールで素敵な絵画を作ったよ\n#絵画ツクール`;
+      const shareText = this.$t("絵画ツクールで素敵な絵画を作ったよ");
+      const hash = this.$t("#絵画ツクール");
+      return `https://www.facebook.com/sharer/sharer.php?u=${this.url}&t=${shareText}\n${hash}`;
     },
+  },
+  mounted() {
+    if (this.defaultLang) {
+      return;
+    }
+    const userLanguage = navigator.language;
+    const setLang = userLanguage === "ja" ? "ja" : "en";
+    this.$cookies.set("locale", setLang);
+    this.$i18n.locale = setLang;
   },
   methods: {
     tweetButton() {
@@ -361,7 +380,9 @@ export default {
       const res = await getArtImage(file, style);
       if (res.status === "NG") {
         alert(
-          "サーバーエラーが発生しました。しばらく経ってから再度お試しください。"
+          this.$t(
+            "サーバーエラーが発生しました。しばらく経ってから再度お試しください。"
+          )
         )
           ? ""
           : window.location.reload();
