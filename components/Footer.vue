@@ -45,7 +45,8 @@
         All Rights Reserved.
       </div>
       <div class="my-4 text-base leading-tight textShadow">
-        {{ new Date().getFullYear() }} — <strong>© 絵画ツクール</strong>
+        {{ new Date().getFullYear() }} —
+        <strong>© {{ $t("絵画ツクール") }}</strong>
       </div>
     </section>
   </div>

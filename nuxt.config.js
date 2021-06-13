@@ -1,5 +1,7 @@
 require("dotenv").config();
 const { API_BASE_URL, API_OGP_URL } = process.env;
+// const userLanguage = window.navigator.language;
+
 export default {
   /*
    ** Headers of the page
@@ -16,12 +18,13 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: "絵画をかんたんに作れるサービスです",
+        content:
+          "You can easily create an Art with your picture.\r\n絵画をかんたんに作れるサービスです",
       },
       {
         hid: "og:site_name",
         property: "og:site_name",
-        content: "絵画",
+        content: "ArtCreator\r\n絵画ツクール",
       },
       { hid: "og:type", property: "og:type", content: "article" },
       {
@@ -29,11 +32,16 @@ export default {
         property: "og:url",
         content: "https://art-creator.net",
       },
-      { hid: "og:title", property: "og:title", content: "絵画ツクール" },
+      {
+        hid: "og:title",
+        property: "og:title",
+        content: "ArtCreator\r\n絵画ツクール",
+      },
       {
         hid: "og:description",
         property: "og:description",
-        content: "絵画をかんたんに作れるサービスです",
+        content:
+          "You can easily create an Art with your picture.\r\n絵画をかんたんに作れるサービスです",
       },
       {
         hid: "og:image",
@@ -65,7 +73,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ["@/plugins/i18n.js"],
 
   components: true,
 
@@ -81,7 +89,11 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv"],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxtjs/dotenv",
+    ["cookie-universal-nuxt", { parseJSON: false }],
+  ],
 
   /*
    ** Build configuration

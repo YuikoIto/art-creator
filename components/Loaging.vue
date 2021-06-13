@@ -10,51 +10,51 @@
 export default {
   data() {
     return {
-      message: "変換中...",
+      message: this.$t("変換中..."),
     };
   },
   mounted() {
     setTimeout(() => {
-      this.message = "ただいま愛情込めて描いています";
+      this.message = this.$t("ただいま愛情込めて描いています");
     }, 2000);
     setTimeout(() => {
-      this.message = "おまたせしてすみません";
+      this.message = this.$t("おまたせしてすみません");
     }, 4000);
     setTimeout(() => {
-      this.message = "焦らずにお待ち下さい";
+      this.message = this.$("焦らずにお待ち下さい");
     }, 6000);
     setTimeout(() => {
-      this.message = "遅すぎますか？";
+      this.message = this.$t("遅すぎますか？");
     }, 8000);
     setTimeout(() => {
-      this.message = "決してサボってるわけではないんです";
+      this.message = this.$("決してサボってるわけではないんです");
     }, 10000);
     setTimeout(() => {
-      this.message = "只今大慌てで描いています";
+      this.message = this.$("只今大慌てで描いています");
     }, 12000);
     setTimeout(() => {
-      this.message = "もう少し..もう少しだけお待ち下さい";
+      this.message = this.$t("もう少し..もう少しだけお待ち下さい");
     }, 14000);
     setTimeout(() => {
-      this.message = "この画像重くないですか？";
+      this.message = this.$t("この画像重くないですか？");
     }, 16000);
     setTimeout(() => {
-      this.message = "でも頑張って描いていますよ";
+      this.message = this.$t("でも頑張って描いていますよ");
     }, 18000);
     setTimeout(() => {
-      this.message = "あとちょっとだと思うんです";
+      this.message = this.$t("あとちょっとだと思うんです");
     }, 20000);
     setTimeout(() => {
-      this.message = "あああ手元が狂いました";
+      this.message = this.$t("あまりにも素敵な画像なので魅入ってしまいました");
     }, 22000);
     setTimeout(() => {
-      this.message = "すぐに修正するのでお待ち下さい";
+      this.message = this.$t("おまたせしてすみません");
     }, 24000);
     setTimeout(() => {
-      this.message = "遅いって？";
+      this.message = this.$("只今大慌てで描いています");
     }, 26000);
     setTimeout(() => {
-      this.message = "お金がなくてサーバー代をケチった結果です";
+      this.message = this.$t("もう少し..もう少しだけお待ち下さい");
     }, 28000);
   },
 };
