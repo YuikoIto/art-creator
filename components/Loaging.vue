@@ -21,16 +21,16 @@ export default {
       this.message = this.$t("おまたせしてすみません");
     }, 4000);
     setTimeout(() => {
-      this.message = this.$("焦らずにお待ち下さい");
+      this.message = this.$t("焦らずにお待ち下さい");
     }, 6000);
     setTimeout(() => {
       this.message = this.$t("遅すぎますか？");
     }, 8000);
     setTimeout(() => {
-      this.message = this.$("決してサボってるわけではないんです");
+      this.message = this.$t("決してサボってるわけではないんです");
     }, 10000);
     setTimeout(() => {
-      this.message = this.$("只今大慌てで描いています");
+      this.message = this.$t("只今大慌てで描いています");
     }, 12000);
     setTimeout(() => {
       this.message = this.$t("もう少し..もう少しだけお待ち下さい");
@@ -51,7 +51,7 @@ export default {
       this.message = this.$t("おまたせしてすみません");
     }, 24000);
     setTimeout(() => {
-      this.message = this.$("只今大慌てで描いています");
+      this.message = this.$t("只今大慌てで描いています");
     }, 26000);
     setTimeout(() => {
       this.message = this.$t("もう少し..もう少しだけお待ち下さい");
