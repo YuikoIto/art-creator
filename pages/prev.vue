@@ -4,22 +4,52 @@
     style="font-family: 'Source Sans Pro', sans-serif"
   >
     <Header />
-    <Section id="make" title="只今メンテナンス中です">
+    <Section id="make" title="画像を選択する">
       <div class="flex flex-wrap">
         <div class="w-full sm:w-1/2 p-6 mx-auto">
           <h3
             class="md:text-3xl text-lg text-gray-800 font-bold leading-none mb-3"
           >
-            {{ $t("ご迷惑をおかけしてすみません。") }}
+            {{ $t("ライブラリから画像を選択") }}
           </h3>
           <p class="text-gray-600 mb-3 text-base">
-            {{ $t("できるだけ早く復旧するようにがんばります。") }}
+            {{ $t("選択できる画像は40Mバイトまでです。") }}
+          </p>
+          <label
+            class="bg-yellow-600 cursor-pointer inline-flex items-center hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded-full"
+          >
+            <svg
+              class="w-8 h-8"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+              />
+            </svg>
+            <span class="ml-2 text-base leading-normal">{{
+              $t("画像を選択")
+            }}</span>
+            <input
+              id="file"
+              ref="fileInput"
+              type="file"
+              accept=".jpeg, .png"
+              class="hidden"
+              @change="setImage"
+            />
+          </label>
+          <p v-if="tooBig" class="text-red-500 mt-5">
+            {{ $t("画像サイズが大き過ぎます。") }}<br />{{
+              $t("40Mバイトまでの画像を選んでください。")
+            }}
           </p>
         </div>
         <div class="w-full mt-3 sm:w-1/2 relative">
           <img
             v-if="!uploadImageUrl"
-            src="../assets/img/sorry.jpg"
+            src="../assets/img/defaultPic.png"
             alt="default"
             class="border-double border-4 border-gray-600"
           />
@@ -121,6 +151,64 @@
         />
       </div>
     </Section>
+    <Modal v-if="twitterModalFlag">
+      <div>
+        <img
+          v-if="changedImageUrl"
+          class="border-double border-4 mt-3 border-gray-600 mx-auto modalImageClass block w-full h-auto object-cover"
+          :src="changedImageUrl"
+        />
+        <div @click="CloseModal" class="absolute cursor-pointer top-0 right-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-8 h-8"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <button
+          @click="tweetButton"
+          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-yellow-400"
+        >
+          {{ $t("ツイートする") }}
+        </button>
+      </div>
+    </Modal>
+    <Modal v-if="FBModalFlag">
+      <div>
+        <img
+          v-if="changedImageUrl"
+          class="border-double border-4 mt-3 border-gray-600 mx-auto modalImageClass block w-full h-auto object-cover"
+          :src="changedImageUrl"
+        />
+        <div @click="CloseModal" class="absolute cursor-pointer top-0 right-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-8 h-8"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <button
+          @click="tweetButton"
+          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-yellow-400"
+        >
+          {{ $t("シェアする") }}
+        </button>
+      </div>
+    </Modal>
     <Footer />
   </div>
 </template>
